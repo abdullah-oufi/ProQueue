@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>APP Queueing Theory Calculator</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<meta name="author" content="Abdullah :), Michelle Berrios">
+		<meta name="description" content="ProQueue 2016">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+		<style>
+		.form-control {
+		    height: 120px;
+		    font-size: 14px;
+		}
+		.fontisize0{font-size: 0px;}
+		.fontisize75{font-size: 75px;}
+		.fontisize85{font-size: 85px;}
+		.fontisize95{font-size: 95px;}
+		.fontisize110{font-size: 110px;}
+		.input-group-addon {
+		    padding: 6px 12px;
+		    font-size: 50px;
+		    font-weight: 400;
+		    line-height: 1;
+		}
+		.insize{font-size: 25px;}
+		.insize35{font-size: 35px;}
+		.insize45{font-size: 45px;}
+		</style>
+	</head>
+	<body >
+		<a class="btn btn-info btn-lg btn-block  fontisize110" href="index.html" role="button">Home</a>
+		<div class="col-md-12 col-xs-12 col-sm-12 col-lg-12 well center-block">
+			
+				<div class="row">
+				  <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
+				  	<div class="input-group">
+						  <span class="input-group-addon" id="sizing-addon1">λ</span>
+						  <input type="text" class="form-control insize45"  id="A" placeholder="Arrival Rate" aria-describedby="sizing-addon1">
+					</div>
+				  </div>
+				  <div class="col-md-6 col-xs-6 col-sm-6 col-lg-6">
+				  	<div class="input-group">
+						  <span class="input-group-addon" id="sizing-addon2">μ</span>
+						  <input type="text" class="form-control insize45"  id="U" placeholder="Service Rate" aria-describedby="sizing-addon2">
+					</div>
+				  </div>
+				</div><br class="fontisize0">		
+				<button type="submit" class="btn btn-danger  fontisize85" onclick="calc(A,U);" >Calculate  M/G/&#x221e;</button>
+			
+		</div>
+
+
+		<div class="col-xs-12 col-sm-12 col-md-12  col-lg-12 well center-block fontisize85">
+			<div class="row">
+			  <div class="col-xs-6 col-sm-6 col-md-6  col-lg-6 "><span>L: </span><span id="resp7"></div>
+			  <div class="col-xs-6 col-sm-6 col-md-6  col-lg-6 "><span>Lq: </span><span id="resp8"></span></div>
+			</div>
+			  			
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6  col-lg-6 "><span>W: </span><span id="resp5"></span></div>
+			  	<div class="col-xs-6 col-sm-6 col-md-6  col-lg-6 "><span>Wq: </span><span id="resp6"></span></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6  col-lg-6 "><span>P0: </span><span id="resp4"></span></div>
+			  	<div class="col-xs-6 col-sm-6 col-md-6  col-lg-6 "><span>ρ: </span><span id="resp10"></span></div>
+			</div>
+			<!--div class="row">
+				
+				<div class="col-xs-6 col-sm-6 col-md-6  col-lg-6 "><span>Pn: </span><span id="resp9"></span></div>
+			  	<div class="col-xs-6 col-sm-6 col-md-6  col-lg-6 "></div>
+			</div-->
+		</div>
+		<script type="text/javascript">
+			function calc(A,U) {
+				//var n = N.value;
+				var A = A.value;
+				var U = U.value;
+				var e = Math.E;
+				var p0 = Math.pow(e,-(A/U));
+				//var facn = factorial(n);
+				//alert(facn);
+			    var resp4 = document.getElementById('resp4');resp4.innerHTML = ficdec(p0);
+			    var resp5 = document.getElementById('resp5');resp5.innerHTML = ficdec((1/U));
+			    var resp6 = document.getElementById('resp6');resp6.innerHTML = ficdec(0);
+			    var resp7 = document.getElementById('resp7');resp7.innerHTML = ficdec((A/U));
+			    var resp8 = document.getElementById('resp8');resp8.innerHTML = ficdec(0);
+			    var resp10 = document.getElementById('resp10');resp10.innerHTML = ficdec(A/U);
+			    //var resp9 = document.getElementById('resp9');resp9.innerHTML=ficdec((p0*Math.pow(A/U,n))/(facn));
+			}
+			function factorial(n) {if (n === 0) {return 1;}return n * factorial(n - 1);}		
+			function ficdec(num){
+				if (coudeci(num)  >= 0 &&  coudeci(num) <= 3) {return num;}
+				else {return num.toFixed(4);}
+				return "&#x221e;";
+			}
+			function coudeci(num) {
+			  var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+			  if (!match) { return 0; }
+			  return Math.max(0,(match[1] ? match[1].length : 0) - (match[2] ? +match[2] : 0));
+			}
+		</script>
+	</body>
+</html>
